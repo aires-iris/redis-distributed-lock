@@ -1,4 +1,4 @@
-package com.aires.order02.controller;
+package com.aires.order02.redis.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.util.UUID;
  * @author: fan zhengxiang
  * @create: 2021/1/21 10:58
  */
-@RestController
+@RestController("redis")
 @Slf4j(topic = "c.OrderController")
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class OrderController {
@@ -33,7 +33,7 @@ public class OrderController {
     @Autowired
     private Redisson redisson;
 
-    @GetMapping("/buy_goods")
+    @GetMapping("/redis_distributed_lock")
     public String deductGoods() {
 
         String uuid = (UUID.randomUUID() + Thread.currentThread().getName()).replaceAll("-", "");

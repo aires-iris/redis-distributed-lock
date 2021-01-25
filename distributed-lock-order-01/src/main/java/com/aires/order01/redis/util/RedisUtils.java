@@ -1,4 +1,4 @@
-package com.aires.order01.util;
+package com.aires.order01.redis.util;
 
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
@@ -19,7 +19,7 @@ public class RedisUtils {
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(20);
         config.setMaxIdle(10);
-        jedisPool = new JedisPool(config, "192.168.17.128", 6379);
+        jedisPool = new JedisPool(config, "192.168.17.131", 6379);
     }
 
     public static Jedis getJedis() {

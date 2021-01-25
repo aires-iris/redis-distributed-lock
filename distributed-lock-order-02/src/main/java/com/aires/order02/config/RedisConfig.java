@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -35,7 +34,7 @@ public class RedisConfig {
     @Bean
     public Redisson getRedisson() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://192.168.17.128:6379").setDatabase(0);
+        config.useSingleServer().setAddress("redis://192.168.17.131:6379").setDatabase(0);
         return (Redisson) Redisson.create(config);
     }
 

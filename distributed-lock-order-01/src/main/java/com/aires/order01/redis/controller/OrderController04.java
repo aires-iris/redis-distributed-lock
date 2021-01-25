@@ -1,4 +1,4 @@
-package com.aires.order01.controller;
+package com.aires.order01.redis.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j(topic = "c.OrderController")
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class OrderController02 {
+public class OrderController04 {
 
     private final StringRedisTemplate redisTemplate;
 
@@ -51,7 +51,24 @@ public class OrderController02 {
                 return String.format("商品库存不足,购买失败! 服务端口号:%s", port);
             }
         } finally {
-            redisTemplate.delete(REDIS_LOCK);
+
+            // 使用redis事务将解锁过程绑定为原子操作
+            while (true) {
+                redisTemplate.watch(REDIS_LOCK);
+                String uuidInRedis = redisTemplate.opsForValue().get(REDIS_LOCK);
+                if (!StringUtils.isEmpty(uuidInRedis) && uuidInRedis.equalsIgnoreCase(uuid)) {
+                    redisTemplate.setEnableTransactionSupport(true);
+                    redisTemplate.multi();
+                    redisTemplate.delete(REDIS_LOCK);
+                    List<Object> list = redisTemplate.exec();
+                    if (list == null) {
+                        continue;
+                    }
+                }
+                redisTemplate.unwatch();
+                break;
+            }
+
         }
     }
 }
