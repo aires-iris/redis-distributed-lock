@@ -6,7 +6,7 @@ spring:
     exclude: org.redisson.spring.starter.RedissonAutoConfiguration
   redis:
     database: 0
-    host: 192.168.17.131
+    host: 192.168.248.138
     port: 6379
     lettuce:
       pool:
