@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
  */
 @Slf4j(topic = "ZookeeperLock")
 public class ZookeeperLock {
-    private final String ROOT_PATH = "/lock";
+ /*   private final String ROOT_PATH = "/lock";
 
     private ZooKeeper zooKeeper;
 
@@ -91,5 +91,5 @@ public class ZookeeperLock {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
 }

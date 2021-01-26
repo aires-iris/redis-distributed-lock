@@ -22,6 +22,7 @@
         <module>distributed-lock-order-01</module>
         <module>distributed-lock-order-02</module>
         <module>distributed-lock-common</module>
+        <module>java-lock-aqs</module>
     </modules>
 
 <!--    <build>

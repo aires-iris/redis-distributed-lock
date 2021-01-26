@@ -14,11 +14,11 @@ import java.util.concurrent.CountDownLatch;
  */
 @Slf4j(topic = "ZookeeperClient")
 public class ZookeeperClient {
-    public static final String ZOOKEEPER_CONNECT = "192.168.248.136:2181";
+    public static final String ZOOKEEPER_CONNECT = "192.168.17.131:2181";
 
     public static CountDownLatch countDownLatch = new CountDownLatch(1);
 
-    public static final int SESSION_TIMEOUT = 100000;
+    public static final int SESSION_TIMEOUT = 50000;
 
     private volatile static ZooKeeper instance;
 

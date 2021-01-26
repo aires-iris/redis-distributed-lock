@@ -34,7 +34,7 @@ public class RedisConfig {
     @Bean
     public Redisson getRedisson() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://192.168.248.138:6379").setDatabase(0);
+        config.useSingleServer().setAddress("redis://192.168.17.131:6379").setDatabase(0);
         return (Redisson) Redisson.create(config);
     }
 
